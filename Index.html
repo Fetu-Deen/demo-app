@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EC2 Deploy Demo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <nav class="nav">
+    <div class="nav-logo">demo<span>.</span>app</div>
+    <div class="nav-badge">
+      <span class="dot"></span>
+      Live on EC2
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-label">AWS EC2 · Node · Serve</div>
+      <h1 class="hero-title">
+        Deployed.<br />
+        <span class="outline">From scratch.</span>
+      </h1>
+      <p class="hero-sub">
+        A static front-end app running on an Amazon EC2 instance,<br />
+        served with Node and <code>serve</code>. No fluff.
+      </p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="handleDeploy()">See the Stack</button>
+        <button class="btn-ghost" onclick="scrollToCards()">How it works ↓</button>
+      </div>
+    </section>
+
+    <section class="cards" id="cards">
+      <div class="card" data-delay="0">
+        <div class="card-num">01</div>
+        <div class="card-icon">🖥️</div>
+        <h3>EC2 Instance</h3>
+        <p>Amazon Linux 2023, t2.micro, launched from the AWS Console with a custom security group.</p>
+      </div>
+      <div class="card" data-delay="1">
+        <div class="card-num">02</div>
+        <div class="card-icon">📦</div>
+        <h3>Node + Serve</h3>
+        <p>Node.js installed via NVM. The <code>serve</code> package hosts the static files on port 3000.</p>
+      </div>
+      <div class="card" data-delay="2">
+        <div class="card-num">03</div>
+        <div class="card-icon">🔓</div>
+        <h3>Security Group</h3>
+        <p>Inbound rules open port 3000 to the world. SSH on 22 locked to your IP only.</p>
+      </div>
+      <div class="card" data-delay="3">
+        <div class="card-num">04</div>
+        <div class="card-icon">🐙</div>
+        <h3>GitHub → EC2</h3>
+        <p>Cloned directly from GitHub onto the instance. One <code>git clone</code> and it's live.</p>
+      </div>
+    </section>
+
+    <section class="terminal-section">
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="t-dot red"></span>
+          <span class="t-dot yellow"></span>
+          <span class="t-dot green"></span>
+          <span class="t-title">bash — ec2-user@ip-172-xx-xx-xx</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="t-line"><span class="prompt">$</span> <span class="cmd" data-text="git clone https://github.com/you/demo-app.git"></span></div>
+          <div class="t-line"><span class="prompt">$</span> <span class="cmd" data-text="cd demo-app"></span></div>
+          <div class="t-line"><span class="prompt">$</span> <span class="cmd" data-text="npm install -g serve"></span></div>
+          <div class="t-line"><span class="prompt">$</span> <span class="cmd" data-text="serve . -l 3000"></span></div>
+          <div class="t-line output"><span class="success">✔</span>  Serving! → http://0.0.0.0:3000</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Built for the EC2 deployment demo · <span class="mono">HTTP · Port 3000</span></p>
+    </footer>
+  </main>
+
+  <div class="modal-overlay" id="modal" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2>The Stack</h2>
+      <ul class="stack-list">
+        <li><span class="tag">OS</span> Amazon Linux 2023</li>
+        <li><span class="tag">Instance</span> t2.micro (Free Tier)</li>
+        <li><span class="tag">Runtime</span> Node.js via NVM</li>
+        <li><span class="tag">Server</span> <code>serve</code> npm package</li>
+        <li><span class="tag">Port</span> 3000 (HTTP)</li>
+        <li><span class="tag">Deploy</span> git clone from GitHub</li>
+        <li><span class="tag">Network</span> Default VPC + Public Subnet</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
